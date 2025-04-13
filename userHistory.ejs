@@ -1,0 +1,40 @@
+<main class="p-6 max-w-4xl mx-auto">
+
+    <!-- Hero Section -->
+    <div class="hero bg-base-200 rounded-lg p-6 mb-6">
+      <div class="hero-content flex-col lg:flex-row">
+        <div>
+          <h1 class="text-3xl font-bold">Welcome, <%= session.user.userName %>!</h1>
+          <p class="py-2 text-lg">Email: <%= session.user.email %></p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Login History Table -->
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Login Date/Time</th>
+            <th>Client Information</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (session.user.loginHistory && session.user.loginHistory.length > 0) { %>
+            <% session.user.loginHistory.forEach(entry => { %>
+              <tr>
+                <td><%= new Date(entry.dateTime).toLocaleString() %></td>
+                <td><%= entry.userAgent %></td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="2" class="text-center">No login history found.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  
+  </main>
+  
